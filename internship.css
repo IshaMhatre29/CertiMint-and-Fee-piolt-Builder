@@ -1,0 +1,391 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+}
+
+/* Header */
+header {
+    background: #6D4C41;
+    color: #fff;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.back-btn, .print-header-btn {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.2s ease;
+}
+
+.back-btn {
+    background: #B08968;
+}
+
+.back-btn:hover {
+    background: #8D6E63;
+}
+
+.print-header-btn {
+    background: #2E7D32;
+}
+
+.print-header-btn:hover {
+    background: #1B5E20;
+}
+
+/* Main Layout */
+.container {
+    width: 95%;
+    margin: 30px auto;
+    display: flex;
+    gap: 25px;
+}
+
+/* Form */
+.form {
+    width: 35%;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.15);
+    height: fit-content;
+}
+
+.form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #6D4C41;
+}
+
+.form label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.form input[type="text"],
+.form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* Signature Input Group */
+.file-input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.file-input-group input[type="file"] {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 13px;
+    background: #fff;
+}
+
+.btn-clear {
+    background: #e53935;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.btn-clear:hover {
+    background: #c62828;
+}
+
+.btn-generate {
+    width: 100%;
+    margin-top: 25px;
+    padding: 12px;
+    background: #6D4C41;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-generate:hover {
+    background: #8D6E63;
+}
+
+.btn-print {
+    width: 100%;
+    margin-top: 12px;
+    padding: 12px;
+    background: #2E7D32;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.btn-print:hover {
+    background: #1B5E20;
+}
+
+/* Certificate */
+.certificate {
+    width: 65%;
+    display: flex;
+    justify-content: center;
+}
+
+.border {
+    width: 100%;
+    min-height: 900px;
+    background: #fffdf8 url("images/logo.png") no-repeat center;
+    background-size: 250px;
+    background-blend-mode: lighten;
+    border: 12px solid #C8A165;
+    outline: 3px solid #6D4C41;
+    outline-offset: -18px;
+    padding: 50px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 10px 25px rgba(0,0,0,.2);
+}
+
+/* Decorative Corners */
+.border::before,
+.border::after {
+    content: "❦";
+    position: absolute;
+    font-size: 35px;
+    color: #C8A165;
+}
+
+.border::before {
+    top: 20px;
+    left: 25px;
+}
+
+.border::after {
+    bottom: 20px;
+    right: 25px;
+}
+
+.logo {
+    width: 90px;
+    margin-bottom: 10px;
+}
+
+.border h1 {
+    font-family: 'Cinzel', serif;
+    color: #6D4C41;
+    letter-spacing: 2px;
+}
+
+.border h2 {
+    margin-top: 10px;
+    color: #B08968;
+    font-family: 'Cinzel', serif;
+}
+
+.certificate-no {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.presented {
+    margin-top: 30px;
+    color: #444;
+}
+
+.text {
+    margin-top: 25px;
+    font-size: 18px;
+}
+
+#studentName {
+    margin-top: 15px;
+    color: #6D4C41;
+    font-size: 36px;
+    text-transform: uppercase;
+}
+
+#output {
+    margin-top: 30px;
+    font-size: 17px;
+    line-height: 1.8;
+    text-align: justify;
+    padding: 0 20px;
+}
+
+/* Bottom Signatures & Seal */
+.bottom {
+    margin-top: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.sign {
+    width: 180px;
+    text-align: center;
+}
+
+.sign-img {
+    width: 120px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.sign-placeholder {
+    height: 50px;
+}
+
+.sign hr {
+    margin-top: 8px;
+    border: none;
+    border-top: 1px solid #000;
+}
+
+.sign p {
+    margin-top: 8px;
+    font-weight: bold;
+}
+
+.seal img {
+    width: 110px;
+}
+
+/* Footer */
+.footer {
+    margin-top: 40px;
+    border-top: 1px solid #ccc;
+    padding-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+/* Print Styles - Single Page Fit */
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+    header, 
+    .form,
+    .header-actions {
+        display: none !important;
+    }
+
+    body {
+        background: #fff !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .container {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 20px !important;
+    }
+
+    .certificate {
+        width: 100% !important;
+    }
+
+    .border {
+        width: 100% !important;
+        min-height: calc(100vh - 40px) !important;
+        height: auto !important;
+        box-shadow: none !important;
+        border: 10px solid #C8A165 !important;
+        padding: 30px 40px !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .border h1 {
+        font-size: 26px !important;
+    }
+
+    .border h2 {
+        font-size: 20px !important;
+        margin-top: 5px !important;
+    }
+
+    .certificate-no {
+        margin-top: 10px !important;
+    }
+
+    .presented {
+        margin-top: 15px !important;
+    }
+
+    .text {
+        margin-top: 15px !important;
+    }
+
+    #studentName {
+        margin-top: 10px !important;
+        font-size: 28px !important;
+    }
+
+    #output {
+        margin-top: 15px !important;
+        font-size: 15px !important;
+        line-height: 1.6 !important;
+    }
+
+    .bottom {
+        margin-top: 35px !important;
+    }
+
+    .footer {
+        margin-top: 40px !important;
+        padding-top: 10px !important;
+    }
+}
+
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .form, .certificate {
+        width: 100%;
+    }
+
+    .border {
+        padding: 25px;
+    }
+}

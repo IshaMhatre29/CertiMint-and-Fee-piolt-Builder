@@ -1,0 +1,474 @@
+/* ==========================================================================
+   1. DESIGN TOKENS (ESPRESSO & METALLIC GOLD PALETTE)
+   ========================================================================== */
+:root {
+    --bg-base: #F5EFEB;            /* Warm Cream Background */
+    --surface-card: #FFFFFF;       /* Pure White Elevation */
+    --surface-subtle: #EFE8E1;     /* Soft Beige Accent */
+    --surface-hover: #E4D9CE;      /* Hover Accent */
+
+    --brand-espresso: #2C1E16;     /* Deep Dark Espresso */
+    --border-color: #DCD0C3;       /* Soft Sand Border */
+    --border-focus: #9A7B1C;       /* Metallic Gold Focus */
+    --text-main: #21160E;          /* Dark Body Text */
+    --text-muted: #665547;         /* Muted Taupe Text */
+
+    --gold-primary: #D4AF37;       /* Metallic Gold */
+    --gold-dark: #9A7B1C;          /* Deep Antique Gold */
+    --gold-light: #F9F3DC;         /* Light Gold Surface */
+    --gold-gradient: linear-gradient(135deg, #BF953F 0%, #FCF6BA 25%, #B38728 50%, #FBF5B7 75%, #AA771C 100%);
+    --gold-shadow: 0 10px 25px rgba(180, 136, 40, 0.2);
+
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --shadow-sm: 0 2px 6px rgba(44, 30, 22, 0.05);
+    --shadow-md: 0 12px 30px rgba(44, 30, 22, 0.12);
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+button { 
+    font-family: inherit; 
+    cursor: pointer; 
+    border: none; 
+    background: none; 
+}
+
+/* ==========================================================================
+   2. HEADER BAR
+   ========================================================================== */
+.app-header {
+    background-color: var(--brand-espresso);
+    color: #FFFFFF;
+    height: 60px;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-md);
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.header-brand .brand-icon {
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--gold-primary);
+    border-radius: var(--radius-sm);
+    display: grid;
+    place-items: center;
+    color: var(--gold-primary);
+    font-size: 1rem;
+}
+
+.header-brand h1 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+}
+
+.btn-print-main {
+    background: var(--gold-gradient);
+    color: var(--brand-espresso);
+    padding: 8px 18px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--gold-shadow);
+    transition: var(--transition);
+}
+
+.btn-print-main:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   3. MAIN DUAL-PANEL WORKSPACE
+   ========================================================================== */
+.main-workspace {
+    flex: 1;
+    padding: 24px 32px;
+    max-width: 1450px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.workspace-grid {
+    display: grid;
+    grid-template-columns: 360px 1fr;
+    gap: 24px;
+    align-items: start;
+}
+
+.form-panel {
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.panel-header {
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.panel-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--brand-espresso);
+}
+
+.panel-header p {
+    font-size: 0.775rem;
+    color: var(--text-muted);
+}
+
+.form-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.input-box label {
+    font-size: 0.775rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.input-box input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    font-size: 0.8125rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+.input-box input:focus {
+    border-color: var(--border-focus);
+    background-color: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+}
+
+.button-group {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.button-group button {
+    flex: 1;
+    padding: 9px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.775rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--brand-espresso);
+    color: #FFFFFF;
+}
+
+.btn-primary:hover {
+    background-color: #3D2C20;
+}
+
+.btn-secondary {
+    background-color: var(--surface-subtle);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+    background-color: var(--surface-hover);
+}
+
+.preview-panel {
+    background-color: var(--surface-subtle);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 800px;
+    overflow-x: auto;
+}
+
+/* ==========================================================================
+   4. GOLDEN OFFER LETTER TEMPLATE (COMPACT ONE-PAGE FORMAT)
+   ========================================================================== */
+.offer-letter-gold {
+    background: #FFFEFA;
+    width: 100%;
+    max-width: 720px;
+    padding: 12px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    box-sizing: border-box;
+}
+
+.gold-outer-border {
+    border: 3px solid transparent;
+    border-image: var(--gold-gradient) 1;
+    padding: 4px;
+    background: #FFFFFF;
+}
+
+.gold-inner-border {
+    border: 1.5px solid var(--gold-dark);
+    padding: 24px 28px;
+    position: relative;
+    background: radial-gradient(circle at center, #FFFFFF 70%, #FAF6EB 100%);
+    outline: 1px dashed var(--gold-primary);
+    outline-offset: -6px;
+}
+
+.corner-ornament {
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    border: 2px solid transparent;
+    border-image: var(--gold-gradient) 1;
+}
+.top-left { top: 4px; left: 4px; border-right: none; border-bottom: none; }
+.top-right { top: 4px; right: 4px; border-left: none; border-bottom: none; }
+.bottom-left { bottom: 4px; left: 4px; border-right: none; border-top: none; }
+.bottom-right { bottom: 4px; right: 4px; border-left: none; border-top: none; }
+
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.company-meta p {
+    font-size: 0.6875rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.company-meta b {
+    color: var(--gold-dark);
+}
+
+/* Logo Group Styling (Side-by-side logos) */
+.logo-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.company-logo img {
+    max-height: 42px;
+    object-fit: contain;
+}
+
+.company-title-block {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.company-title-block h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--brand-espresso);
+    letter-spacing: 0.05em;
+    margin-bottom: 2px;
+}
+
+.company-title-block p {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.gold-divider {
+    height: 2px;
+    background: var(--gold-gradient);
+    border: none;
+    margin: 10px 0 14px;
+}
+
+.letter-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--brand-espresso);
+    letter-spacing: 0.06em;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+}
+
+.letter-body {
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--text-main);
+}
+
+.details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    border: 1px solid var(--border-color);
+}
+
+.details-table td {
+    padding: 6px 10px;
+    border: 1px solid var(--border-color);
+    font-size: 0.775rem;
+}
+
+.details-table td:first-child {
+    font-weight: 600;
+    background-color: var(--gold-light);
+    color: var(--brand-espresso);
+    width: 35%;
+}
+
+.signature-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 24px;
+    text-align: center;
+}
+
+.signature-row div {
+    font-size: 0.75rem;
+    color: var(--brand-espresso);
+}
+
+.signature-line {
+    width: 140px;
+    height: 1px;
+    background: var(--border-color);
+    margin: 0 auto 4px;
+}
+
+.acceptance-block {
+    margin-top: 18px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--gold-primary);
+}
+
+.acceptance-block h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--brand-espresso);
+    margin-bottom: 4px;
+}
+
+.acceptance-block p {
+    font-size: 0.75rem;
+}
+
+footer {
+    text-align: center;
+    padding: 12px;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+@media (max-width: 1024px) {
+    .workspace-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==========================================================================
+   5. STRICT ONE-PAGE PRINT MEDIA STYLES
+   ========================================================================== */
+@page {
+    size: A4 portrait;
+    margin: 0;
+}
+
+@media print {
+    html, body {
+        height: 100%;
+        background: white !important;
+        overflow: hidden !important;
+    }
+
+    .app-header, .panel-header, .form-panel, footer, .button-group { 
+        display: none !important; 
+    }
+
+    .main-workspace { 
+        padding: 0 !important; 
+        margin: 0 !important;
+        max-width: 100% !important; 
+        width: 100% !important;
+    }
+
+    .workspace-grid { 
+        display: block !important; 
+    }
+
+    .preview-panel { 
+        background: white !important; 
+        border: none !important; 
+        padding: 0 !important; 
+        min-height: auto !important;
+    }
+
+    .offer-letter-gold {
+        box-shadow: none !important;
+        border: none !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 10mm !important;
+        page-break-inside: avoid !important;
+        page-break-after: avoid !important;
+        page-break-before: avoid !important;
+    }
+}

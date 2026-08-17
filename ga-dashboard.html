@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganishka Academy (GA) | Dashboard</title>
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="ga-dashboard.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+    <!-- Constant Rich Dark Brown Sidebar -->
+    <aside class="app-sidebar">
+        <div class="brand-header">
+            <div class="brand-icon">
+                <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <span class="brand-title">Ganishka Portal</span>
+        </div>
+
+        <ul class="nav-list">
+            <li class="nav-item">
+                <a href="dashboard.html">
+                    <i class="fa-solid fa-border-all"></i>
+                    Overview
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="gt_dashboard.html">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    Technology
+                </a>
+            </li>
+            <li class="nav-item active">
+                <a href="ga-dashboard.html">
+                    <i class="fa-solid fa-book-open"></i>
+                    Academy
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="fee-record.html">
+                    <i class="fa-solid fa-receipt"></i>
+                    Fee Records
+                </a>
+            </li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <button class="btn-sidebar-logout" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Sign Out
+            </button>
+        </div>
+    </aside>
+
+    <!-- Header Shell -->
+    <header class="app-header">
+        <div class="header-title-area">
+            <h2>Ganishka Academy (GA)</h2>
+        </div>
+
+        <div class="user-profile-bar">
+            <div class="user-info">
+                <div class="avatar-wrapper">
+                    <div class="avatar">AD</div>
+                    <span class="status-indicator"></span>
+                </div>
+                <div class="user-details">
+                    <div class="name">Administrator</div>
+                    <div class="role">System Admin</div>
+                </div>
+            </div>
+
+            <button class="btn-header-logout" onclick="logout()" title="Sign Out">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Workspace Area -->
+    <main class="app-main">
+        <div class="page-title-block">
+            <h1>Course Certificate Management</h1>
+            <p>Generate, issue, and manage academy course completion certificates.</p>
+        </div>
+
+        <section class="cards">
+            <!-- Course Completion Certificate -->
+            <div class="card">
+                <div class="icon">
+                    <i class="fa-solid fa-certificate"></i>
+                </div>
+                <h2>Course Completion Certificate</h2>
+                <p>
+                    Generate professional course completion certificates
+                    for academy students.
+                </p>
+                <button onclick="openCertificate()">
+                    Open
+                </button>
+            </div>
+
+            <!-- Certificate History -->
+            <div class="card">
+                <div class="icon">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                </div>
+                <h2>Certificate History</h2>
+                <p>
+                    View, search, download and manage previously generated
+                    certificates.
+                </p>
+                <button onclick="openHistory()">
+                    Open
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            © 2026 Ganishka Academy | CertiMint & FeePilot
+        </footer>
+    </main>
+
+</div>
+
+<!-- External JavaScript File -->
+<script src="ga-dashboard.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Certificate Generator</title>
+    <link rel="stylesheet" href="internship.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <h2>Internship Certificate Generator</h2>
+    <div class="header-actions">
+        <button class="print-header-btn" onclick="window.print()">🖨️ Print / Save PDF</button>
+        <button class="back-btn" onclick="history.back()">⬅ Back</button>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- Left Form -->
+    <div class="form">
+        <h3>Student Details</h3>
+
+        <label for="certificateNo">Certificate Number</label>
+        <input type="text" id="certificateNo" placeholder="GT2026001" readonly>
+
+        <label for="id">Student ID</label>
+        <input type="text" id="id" placeholder="STU001" readonly>
+
+        <label for="name">Student Name</label>
+        <input type="text" id="name" placeholder="John Doe">
+
+        <label for="college">College Name</label>
+        <input type="text" id="college" placeholder="ABC Institute of Technology">
+
+        <label for="domain">Internship Domain</label>
+        <input type="text" id="domain" placeholder="Web Development">
+
+        <label for="start">Start Date</label>
+        <input type="date" id="start">
+
+        <label for="end">End Date</label>
+        <input type="date" id="end">
+
+        <label for="issue">Issue Date</label>
+        <input type="date" id="issue">
+
+        <label for="guideSignatureInput">Project Guide Signature (Upload Image)</label>
+        <div class="file-input-group">
+            <input type="file" id="guideSignatureInput" accept="image/*" onchange="uploadGuideSignature(event)">
+            <button type="button" class="btn-clear" onclick="clearGuideSignature()">Clear</button>
+        </div>
+
+        <button type="button" class="btn-generate" onclick="generateCertificate()">
+            Generate Certificate
+        </button>
+        
+        <button type="button" class="btn-print" onclick="window.print()">
+            🖨️ Print Certificate
+        </button>
+    </div>
+
+    <!-- Right Certificate -->
+    <div class="certificate" id="certificate">
+        <div class="border">
+            
+            <!-- Logo -->
+            <img src="logo.jpeg" class="logo" alt="Ganishka Technology Logo">
+
+            <h1>GANISHKA TECHNOLOGY</h1>
+            <h2>INTERNSHIP CERTIFICATE</h2>
+
+            <p class="certificate-no">
+                Certificate No : <span id="certNo">GT2026001</span>
+            </p>
+
+            <h3 class="presented">
+                Certificate of Completion
+            </h3>
+
+            <p class="text">
+                This certificate is proudly presented to
+            </p>
+
+            <h2 id="studentName">
+                Student Name
+            </h2>
+
+            <p id="output">
+                The certificate details will appear here after clicking <strong>Generate Certificate</strong>.
+            </p>
+
+            <div class="bottom">
+                <div class="sign">
+                    <img id="guideSignImg" class="sign-img" src="" alt="Guide Signature" style="display: none;">
+                    <div id="signPlaceholder" class="sign-placeholder"></div>
+                    <hr>
+                    <p>Project Guide</p>
+                </div>
+
+                <div class="sign">
+                    <img src="images/signature.png" class="sign-img" alt="Founder Signature">
+                    <hr>
+                    <p>Founder of Ganishka Technology</p>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Ganishka Technology | www.ganishkatechnology.com</p>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<script src="internship.js"></script>
+</body>
+</html>

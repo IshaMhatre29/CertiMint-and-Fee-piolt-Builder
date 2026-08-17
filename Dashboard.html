@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Management Board | Rich Brown & Beige Edition</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- Rich Dark Brown Sidebar -->
+  <aside class="app-sidebar">
+    <div class="brand-header">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      </div>
+      <span class="brand-title">Ganishka Portal</span>
+    </div>
+
+    <ul class="nav-list">
+      <li class="nav-item active">
+        <a href="#">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          Overview
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="gt_dashboard.html">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Technology
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="ga-dashboard.html">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          Academy
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="fee-record.html">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+          Fee Records
+        </a>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <button class="btn btn-sidebar-logout" id="btnLogoutSidebar">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Header Shell -->
+  <header class="app-header">
+    <div class="user-profile-bar">
+      <div class="user-info">
+        <div class="avatar-wrapper">
+          <div class="avatar">AD</div>
+          <span class="status-indicator"></span>
+        </div>
+        <div class="user-details">
+          <div class="name">Administrator</div>
+          <div class="role">System Admin</div>
+        </div>
+      </div>
+
+      <button class="btn-header-logout" id="btnLogoutHeader" title="Logout">
+        <svg viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        Logout
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Workspace Area -->
+  <main class="app-main">
+    <div class="page-title-block">
+      <h1>Student Management Board</h1>
+      <p>Welcome back, Admin 👋</p>
+    </div>
+
+    <!-- Real-time Dynamic Metrics -->
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="label">Certificate Issued</div>
+        <div class="value" id="val-interns">0</div>
+      </div>
+      <div class="metric-card">
+        <div class="label">Pending Payments</div>
+        <div class="value" id="val-payments">0</div>
+      </div>
+    </div>
+
+    <!-- Navigation Portals -->
+    <div class="portal-grid">
+      <article class="portal-card">
+        <div class="portal-icon-box">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <h3>Ganishka Technology</h3>
+        <p>Manage technical students, internship track details, projects, and certificates.</p>
+        <button class="btn btn-primary" onclick="location.href='gt_dashboard.html'">
+          Open Dashboard
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </article>
+
+      <article class="portal-card">
+        <div class="portal-icon-box">
+          <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+        </div>
+        <h3>Ganishka Academy</h3>
+        <p>Manage courses, active student enrollments, training schedules, and certificates.</p>
+        <button class="btn btn-primary" onclick="location.href='ga-dashboard.html'">
+          Open Dashboard
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </article>
+
+      <article class="portal-card">
+        <div class="portal-icon-box">
+          <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Fee Records</h3>
+        <p>Manage internship and project fee records, transaction histories, and receipts.</p>
+        <button class="btn btn-primary" onclick="location.href='fee-record.html'">
+          Open Dashboard
+          <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </button>
+      </article>
+    </div>
+  </main>
+
+</div>
+
+<!-- External JavaScript -->
+<script src="Dashboard.js"></script>
+</body>
+</html>

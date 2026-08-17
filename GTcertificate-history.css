@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: #f4f4f4;
+}
+
+header {
+    background: #6D4C41;
+    color: #fff;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.back-btn {
+    color: #fff;
+    background: #B08968;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+    background: #8D6E63;
+}
+
+.history-container {
+    width: 92%;
+    max-width: 1200px;
+    margin: 30px auto;
+    background: #fff;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,.1);
+}
+
+.history-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.search-box input {
+    width: 380px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.stats-badge {
+    background: #f0eae1;
+    color: #6D4C41;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+th {
+    background-color: #6D4C41;
+    color: white;
+    font-weight: 500;
+}
+
+tr:hover {
+    background-color: #fafafa;
+}
+
+.action-btn {
+    border: none;
+    padding: 6px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 5px;
+}
+
+.btn-open-cert {
+    background: #2E7D32;
+    color: white;
+}
+
+.btn-open-cert:hover {
+    background: #1B5E20;
+}
+
+.btn-delete-cert {
+    background: #e53935;
+    color: white;
+}
+
+.btn-delete-cert:hover {
+    background: #c62828;
+}
+
+.no-records {
+    text-align: center;
+    padding: 30px;
+    color: #888;
+}

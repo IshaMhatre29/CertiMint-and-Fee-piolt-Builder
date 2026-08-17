@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Certificate History - Ganishka Academy</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    body { background-color: #1A1A1A; color: #FFF; min-height: 100vh; display: flex; flex-direction: column; }
+
+    /* Top Navigation Bar */
+    header {
+      height: 60px;
+      background: linear-gradient(90deg, #141414, #241D17);
+      color: #E2C98C;
+      padding: 0 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #3A2E24;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+    header h1 { font-family: 'Cinzel', serif; font-size: 18px; color: #D4AF37; letter-spacing: 1px; }
+    
+    .btn-back {
+      background: #332317;
+      color: #E2C98C;
+      border: 1px solid #AA7C11;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn-back:hover { background: #AA7C11; color: #FFF; }
+
+    /* Main Content Area */
+    .container { padding: 30px; max-width: 1200px; margin: 0 auto; width: 100%; flex: 1; }
+    
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 15px;
+      background: #242424;
+      padding: 15px 20px;
+      border-radius: 6px;
+      border: 1px solid #333;
+    }
+
+    .search-input {
+      flex: 1;
+      max-width: 400px;
+      padding: 10px 14px;
+      background: #111;
+      border: 1px solid #444;
+      color: #FFF;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    .search-input:focus { outline: none; border-color: #AA7C11; }
+
+    .counter-badge { font-size: 13px; color: #AAA; }
+    .counter-badge b { color: #D4AF37; }
+
+    /* History Table */
+    .table-responsive { overflow-x: auto; background: #222; border-radius: 6px; border: 1px solid #333; }
+    .history-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+    .history-table th { background: #2A1D13; color: #D4AF37; padding: 14px 16px; border-bottom: 2px solid #AA7C11; text-transform: uppercase; font-size: 11px; letter-spacing: 0.5px; }
+    .history-table td { padding: 14px 16px; border-bottom: 1px solid #333; color: #DDD; }
+    .history-table tr:hover { background-color: #292929; }
+
+    .action-btn { padding: 6px 12px; border: none; border-radius: 4px; cursor: pointer; font-size: 11px; font-weight: bold; margin-right: 6px; }
+    .btn-view { background: #AA7C11; color: #FFF; }
+    .btn-view:hover { background: #C5A059; }
+    .btn-delete { background: #8B2626; color: #FFF; }
+    .btn-delete:hover { background: #A83232; }
+
+    /* Preview Modal Styling */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+    .modal-content {
+      background: #282828;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 950px;
+      width: 100%;
+    }
+    .close-modal {
+      position: absolute;
+      right: 15px; top: 10px;
+      color: #FFF;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Printable Certificate Box inside Modal */
+    .certificate-card {
+      width: 100%;
+      max-width: 880px;
+      aspect-ratio: 1.414 / 1;
+      background: #FFFDF9;
+      border: 10px solid #231911;
+      padding: 12px;
+      display: flex; flex-direction: column;
+      color: #111;
+      margin-top: 15px;
+    }
+    .cert-outer-border {
+      border: 2px solid #C5A059; outline: 1px solid #C5A059; outline-offset: 4px;
+      height: 100%; padding: 20px 30px;
+      display: flex; flex-direction: column; justify-content: space-between; text-align: center;
+    }
+    .cert-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E0D5C1; padding-bottom: 8px; }
+    .brand-container { display: flex; align-items: center; gap: 10px; }
+    .logo-img { height: 40px; }
+    .brand-title { font-family: 'Cinzel', serif; font-weight: 700; font-size: 16px; color: #231911; }
+    .cert-title { font-family: 'Cinzel', serif; font-size: 22px; color: #AA7C11; font-weight: 700; margin-top: 5px; }
+    .student-name-display { font-size: 24px; font-family: 'Playfair Display', serif; font-weight: 700; color: #111; border-bottom: 2px solid #AA7C11; display: inline-block; padding: 0 25px; }
+    .cert-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 11px; }
+    .cert-table td { border: 1px solid #E5DEC9; padding: 5px 10px; text-align: left; }
+    .cert-table tr td:first-child { font-weight: 700; background: #FAF6ED; width: 32%; }
+    .cert-footer { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; }
+
+    /* Print Setup */
+    @media print {
+      body * { visibility: hidden; }
+      .certificate-card, .certificate-card * { visibility: visible; }
+      .certificate-card { position: fixed; left: 0; top: 0; width: 100vw !important; height: 100vh !important; border: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📁 CERTIFICATE HISTORY MANAGEMENT</h1>
+    <a href="course_certificate.html" class="btn-back">➕ Generate New Certificate</a>
+  </header>
+
+  <div class="container">
+    <div class="controls-bar">
+      <input type="text" class="search-input" id="searchBox" placeholder="🔍 Search by Student Name or Ref No..." onkeyup="renderHistory()">
+      <div class="counter-badge">Total Records: <b id="totalCount">0</b></div>
+    </div>
+
+    <div class="table-responsive">
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Ref No</th>
+            <th>Student Name</th>
+            <th>Course Title</th>
+            <th>Instructor</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="historyBody">
+          <!-- Dynamic Content -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Preview & Print Modal -->
+  <div class="modal" id="certModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <button class="action-btn btn-view" style="padding: 10px 20px; font-size: 13px;" onclick="window.print()">🖨️ Print / Save PDF</button>
+      
+      <div class="certificate-card" id="modalCertCard">
+        <div class="cert-outer-border">
+          <div class="cert-header">
+            <div style="font-size: 10px; color: #666; text-align: left;">
+              UDYAM-MH-27-0091231<br>GSTIN: 27BZTPS1678H1ZI
+            </div>
+            <div class="brand-container">
+              <img id="mLogo" class="logo-img" src="https://via.placeholder.com/80x40/231911/E2C98C?text=LOGO" alt="Logo">
+              <div class="brand-title" id="mAcademyHeader">GANISHKA ACADEMY</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="cert-title">CERTIFICATE OF COMPLETION</div>
+            <p style="font-size: 12px; margin-top:2px;">This is proudly presented to</p>
+            <div class="student-name-display" id="mName">Student Name</div>
+            <p style="font-size: 12px;">for successfully completing the course at <b id="mAcademyBody">Ganishka Academy</b>.</p>
+          </div>
+
+          <table class="cert-table">
+            <tr><td>Certificate Ref No</td><td id="mRefNo">N/A</td></tr>
+            <tr><td>Course Title</td><td id="mCourse">N/A</td></tr>
+            <tr><td>Instructor</td><td id="mLead">N/A</td></tr>
+            <tr><td>Completion Date</td><td id="mDate">N/A</td></tr>
+          </table>
+
+          <div class="cert-footer">
+            <div style="border-top: 1px solid #777; width: 130px; padding-top:2px;">Course Lead</div>
+            <div style="border-top: 1px solid #777; width: 130px; padding-top:2px;">Director / Founder</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Fetch and Display saved Certificates
+    function renderHistory() {
+      const history = JSON.parse(localStorage.getItem('cert_history') || '[]');
+      const search = document.getElementById('searchBox').value.toLowerCase();
+      const tbody = document.getElementById('historyBody');
+      tbody.innerHTML = '';
+
+      const filtered = history.filter(item => 
+        (item.name && item.name.toLowerCase().includes(search)) || 
+        (item.refNo && item.refNo.toLowerCase().includes(search))
+      );
+
+      document.getElementById('totalCount').innerText = filtered.length;
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; color:#888; padding: 20px;">Koi Certificate History Nahi Mili</td></tr>';
+        return;
+      }
+
+      filtered.reverse().forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><b style="color:#D4AF37;">${item.refNo || 'N/A'}</b></td>
+          <td>${item.name || 'N/A'}</td>
+          <td>${item.course || 'N/A'}</td>
+          <td>${item.lead || 'N/A'}</td>
+          <td>${item.date ? new Date(item.date).toLocaleDateString('en-GB') : 'N/A'}</td>
+          <td>
+            <button class="action-btn btn-view" onclick="viewCertModal(${item.id})">👁️ View / Print</button>
+            <button class="action-btn btn-delete" onclick="deleteCert(${item.id})">🗑️ Delete</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // View Certificate Modal
+    function viewCertModal(id) {
+      const history = JSON.parse(localStorage.getItem('cert_history') || '[]');
+      const item = history.find(c => c.id === id);
+      if (!item) return;
+
+      document.getElementById('mRefNo').innerText = item.refNo || 'N/A';
+      document.getElementById('mName').innerText = item.name || 'Student Name';
+      document.getElementById('mCourse').innerText = item.course || 'Course Name';
+      document.getElementById('mLead').innerText = item.lead || 'Instructor Name';
+      
+      const academy = item.academy || "Ganishka Academy";
+      document.getElementById('mAcademyHeader').innerText = academy.toUpperCase();
+      document.getElementById('mAcademyBody').innerText = academy;
+
+      document.getElementById('mDate').innerText = item.date ? new Date(item.date).toLocaleDateString('en-GB') : 'N/A';
+
+      if (item.logo) {
+        document.getElementById('mLogo').src = item.logo;
+      }
+
+      document.getElementById('certModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('certModal').style.display = 'none';
+    }
+
+    // Delete Item
+    function deleteCert(id) {
+      if (!confirm('Kya aap sach mein is record ko delete karna chahte hain?')) return;
+      let history = JSON.parse(localStorage.getItem('cert_history') || '[]');
+      history = history.filter(c => c.id !== id);
+      localStorage.setItem('cert_history', JSON.stringify(history));
+      renderHistory();
+    }
+
+    // Load history on startup
+    renderHistory();
+  </script>
+</body>
+</html>

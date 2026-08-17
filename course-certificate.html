@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Golden Certificate Studio & History</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Montserrat:wght@400;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; }
+    html, body { width: 100%; height: 100%; overflow: hidden; background-color: #1A1A1A; }
+
+    /* Top Navigation Bar */
+    header {
+      height: 52px;
+      background: linear-gradient(90deg, #141414, #241D17);
+      color: #E2C98C;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #3A2E24;
+    }
+    header h1 { font-family: 'Cinzel', serif; font-size: 16px; color: #D4AF37; }
+    
+    .nav-tabs { display: flex; gap: 10px; }
+    .tab-btn {
+      background: transparent;
+      color: #E2C98C;
+      border: 1px solid #AA7C11;
+      padding: 6px 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .tab-btn.active { background: #AA7C11; color: #FFF; }
+
+    /* App Layout */
+    .app-container { display: flex; width: 100vw; height: calc(100vh - 52px); }
+
+    /* Left Sidebar */
+    .form-panel {
+      width: 330px;
+      min-width: 330px;
+      background: #FFFFFF;
+      padding: 20px;
+      border-right: 1px solid #222;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .form-panel h3 { font-size: 14px; color: #1A1A1A; text-transform: uppercase; }
+    .subtitle { font-size: 11px; color: #777; margin-top: -6px; }
+    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .form-group label { font-size: 11px; font-weight: 700; color: #444; text-transform: uppercase; }
+    .form-group input {
+      padding: 8px 10px;
+      background: #F9F8F6;
+      border: 1px solid #DCD6CD;
+      border-radius: 4px;
+      font-size: 12px;
+    }
+
+    .btn-save { background: linear-gradient(135deg, #AA7C11, #7A580A); color: #FFF; padding: 10px; border: none; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 700; margin-top: 5px; }
+
+    /* Right Section Views */
+    .preview-panel {
+      flex: 1;
+      background: #282828;
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .history-panel {
+      flex: 1;
+      background: #222;
+      padding: 25px;
+      overflow-y: auto;
+      display: none; /* Toggle via JS */
+      color: #FFF;
+    }
+
+    /* History Table Styling */
+    .search-box {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      background: #111;
+      border: 1px solid #444;
+      color: #FFF;
+      border-radius: 4px;
+    }
+    .history-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+    .history-table th { background: #332317; color: #D4AF37; padding: 12px; border-bottom: 2px solid #AA7C11; }
+    .history-table td { padding: 12px; border-bottom: 1px solid #333; }
+    .action-btn { padding: 5px 10px; border: none; border-radius: 3px; cursor: pointer; font-size: 11px; font-weight: bold; }
+    .btn-view { background: #AA7C11; color: #FFF; margin-right: 5px; }
+    .btn-delete { background: #A83232; color: #FFF; }
+
+    /* Certificate Layout */
+    .certificate-card {
+      width: 100%; height: 100%;
+      max-width: 920px; max-height: 600px;
+      aspect-ratio: 1.414 / 1;
+      background: #FFFDF9;
+      border: 12px solid #231911;
+      padding: 12px;
+      display: flex; flex-direction: column;
+    }
+    .cert-outer-border {
+      border: 2px solid #C5A059; outline: 1px solid #C5A059; outline-offset: 4px;
+      height: 100%; padding: 20px 30px;
+      display: flex; flex-direction: column; justify-content: space-between; text-align: center;
+    }
+    .cert-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #E0D5C1; padding-bottom: 10px; }
+    .brand-container { display: flex; align-items: center; gap: 10px; }
+    .logo-img { height: 40px; }
+    .brand-title { font-family: 'Cinzel', serif; font-weight: 700; font-size: 18px; color: #231911; }
+    .cert-title { font-family: 'Cinzel', serif; font-size: 22px; color: #AA7C11; font-weight: 700; margin-top: 5px; }
+    .student-name-display { font-size: 24px; font-family: 'Playfair Display', serif; font-weight: 700; color: #111; border-bottom: 2px solid #AA7C11; display: inline-block; padding: 0 25px; }
+    .cert-table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: 11px; }
+    .cert-table td { border: 1px solid #E5DEC9; padding: 5px 10px; text-align: left; }
+    .cert-table tr td:first-child { font-weight: 700; background: #FAF6ED; width: 32%; }
+    .cert-footer { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; }
+
+    /* Print Setup */
+    @media print {
+      body * { visibility: hidden; }
+      .certificate-card, .certificate-card * { visibility: visible; }
+      .certificate-card { position: fixed; left: 0; top: 0; width: 100vw !important; height: 100vh !important; border: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>📜 GOLDEN CERTIFICATE STUDIO</h1>
+    <div class="nav-tabs">
+      <button class="tab-btn active" id="tabGen" onclick="switchTab('generator')">➕ Generator</button>
+      <button class="tab-btn" id="tabHist" onclick="switchTab('history')">📁 Certificate History</button>
+    </div>
+  </header>
+
+  <div class="app-container">
+    <!-- Left Sidebar Input -->
+    <div class="form-panel">
+      <h3>Certificate Form</h3>
+      <p class="subtitle">Enter Details & Save to History</p>
+
+      <div class="form-group">
+        <label>Upload Logo</label>
+        <input type="file" id="inLogo" accept="image/*" onchange="loadLogo(event)">
+      </div>
+      <div class="form-group">
+        <label>Certificate Ref No</label>
+        <input type="text" id="inRefNo" value="GA/2026/CERT-001" oninput="updateCert()">
+      </div>
+      <div class="form-group">
+        <label>Student Full Name</label>
+        <input type="text" id="inName" value="Ganesh Sharma" oninput="updateCert()">
+      </div>
+      <div class="form-group">
+        <label>Course Name</label>
+        <input type="text" id="inCourse" value="Full Stack Web Development" oninput="updateCert()">
+      </div>
+      <div class="form-group">
+        <label>Instructor / Lead</label>
+        <input type="text" id="inLead" value="Er. Rajesh Verma" oninput="updateCert()">
+      </div>
+      <div class="form-group">
+        <label>Academy Name</label>
+        <input type="text" id="inAcademy" value="Ganishka Academy" oninput="updateCert()">
+      </div>
+      <div class="form-group">
+        <label>Completion Date</label>
+        <input type="date" id="inDate" onchange="updateCert()">
+      </div>
+
+      <button class="btn-save" onclick="saveCertificate()">💾 Save & Add to History</button>
+      <button class="btn-save" style="background:#333;" onclick="window.print()">🖨️ Print Current</button>
+    </div>
+
+    <!-- Generator Preview Pane -->
+    <div class="preview-panel" id="previewPane">
+      <div class="certificate-card">
+        <div class="cert-outer-border">
+          <div class="cert-header">
+            <div style="font-size: 10px; color: #666; text-align: left;">
+              UDYAM-MH-27-0091231<br>GSTIN: 27BZTPS1678H1ZI
+            </div>
+            <div class="brand-container">
+              <img id="outLogo" class="logo-img" src="https://via.placeholder.com/80x40/231911/E2C98C?text=LOGO" alt="Logo">
+              <div class="brand-title" id="outAcademyHeader">GANISHKA ACADEMY</div>
+            </div>
+          </div>
+
+          <div>
+            <div class="cert-title">CERTIFICATE OF COMPLETION</div>
+            <p style="font-size: 12px; margin-top:2px;">This is proudly presented to</p>
+            <div class="student-name-display" id="outName">Ganesh Sharma</div>
+            <p style="font-size: 12px;">for successfully completing the course at <b id="outAcademyBody">Ganishka Academy</b>.</p>
+          </div>
+
+          <table class="cert-table">
+            <tr><td>Certificate Ref No</td><td id="outRefNo">GA/2026/CERT-001</td></tr>
+            <tr><td>Course Title</td><td id="outCourse">Full Stack Web Development</td></tr>
+            <tr><td>Instructor</td><td id="outLead">Er. Rajesh Verma</td></tr>
+            <tr><td>Completion Date</td><td id="outDate">N/A</td></tr>
+          </table>
+
+          <div class="cert-footer">
+            <div style="border-top: 1px solid #777; width: 130px; padding-top:2px;">Course Lead</div>
+            <div style="border-top: 1px solid #777; width: 130px; padding-top:2px;">Director / Founder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- History View Pane -->
+    <div class="history-panel" id="historyPane">
+      <h2>Generated Certificate Records</h2>
+      <p style="font-size: 12px; color: #AAA; margin-bottom: 15px;">Search and manage past generated certificates.</p>
+      
+      <input type="text" class="search-box" id="searchHist" placeholder="Search by Student Name or Ref No..." onkeyup="renderHistory()">
+
+      <table class="history-table">
+        <thead>
+          <tr>
+            <th>Ref No</th>
+            <th>Student Name</th>
+            <th>Course</th>
+            <th>Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="historyTableBody">
+          <!-- Dynamic History Rows -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    let logoBase64 = "https://via.placeholder.com/80x40/231911/E2C98C?text=LOGO";
+
+    function updateCert() {
+      document.getElementById('outRefNo').innerText = document.getElementById('inRefNo').value || "N/A";
+      document.getElementById('outName').innerText = document.getElementById('inName').value || "Student Name";
+      document.getElementById('outCourse').innerText = document.getElementById('inCourse').value || "Course Name";
+      document.getElementById('outLead').innerText = document.getElementById('inLead').value || "Instructor Name";
+      
+      const academy = document.getElementById('inAcademy').value || "Ganishka Academy";
+      document.getElementById('outAcademyHeader').innerText = academy.toUpperCase();
+      document.getElementById('outAcademyBody').innerText = academy;
+
+      const dateVal = document.getElementById('inDate').value;
+      document.getElementById('outDate').innerText = dateVal ? new Date(dateVal).toLocaleDateString('en-GB') : "N/A";
+    }
+
+    function loadLogo(event) {
+      const reader = new FileReader();
+      reader.onload = function() {
+        logoBase64 = reader.result;
+        document.getElementById('outLogo').src = logoBase64;
+      }
+      if (event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // Save Certificate Record to LocalStorage
+    function saveCertificate() {
+      const record = {
+        id: Date.now(),
+        refNo: document.getElementById('inRefNo').value,
+        name: document.getElementById('inName').value,
+        course: document.getElementById('inCourse').value,
+        lead: document.getElementById('inLead').value,
+        academy: document.getElementById('inAcademy').value,
+        date: document.getElementById('inDate').value,
+        logo: logoBase64
+      };
+
+      let history = JSON.parse(localStorage.getItem('cert_history') || '[]');
+      history.push(record);
+      localStorage.setItem('cert_history', JSON.stringify(history));
+
+      alert('Certificate History mein successfully Save ho gaya!');
+      renderHistory();
+    }
+
+    // Render Table in History View
+    function renderHistory() {
+      const history = JSON.parse(localStorage.getItem('cert_history') || '[]');
+      const search = document.getElementById('searchHist').value.toLowerCase();
+      const tbody = document.getElementById('historyTableBody');
+      tbody.innerHTML = '';
+
+      const filtered = history.filter(item => 
+        item.name.toLowerCase().includes(search) || item.refNo.toLowerCase().includes(search)
+      );
+
+      if(filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" style="text-align:center; color:#888;">Koi Record Nahi Mila</td></tr>';
+        return;
+      }
+
+      filtered.reverse().forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><b>${item.refNo}</b></td>
+          <td>${item.name}</td>
+          <td>${item.course}</td>
+          <td>${item.date ? new Date(item.date).toLocaleDateString('en-GB') : 'N/A'}</td>
+          <td>
+            <button class="action-btn btn-view" onclick="viewCert(${item.id})">View/Print</button>
+            <button class="action-btn btn-delete" onclick="deleteCert(${item.id})">Delete</button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    // View Certificate from History
+    function viewCert(id) {
+      const history = JSON.parse(localStorage.getItem('cert_history') || '[]');
+      const item = history.find(c => c.id === id);
+      if(!item) return;
+
+      document.getElementById('inRefNo').value = item.refNo;
+      document.getElementById('inName').value = item.name;
+      document.getElementById('inCourse').value = item.course;
+      document.getElementById('inLead').value = item.lead;
+      document.getElementById('inAcademy').value = item.academy;
+      document.getElementById('inDate').value = item.date;
+      if(item.logo) {
+        logoBase64 = item.logo;
+        document.getElementById('outLogo').src = item.logo;
+      }
+
+      updateCert();
+      switchTab('generator');
+    }
+
+    // Delete Record
+    function deleteCert(id) {
+      if(!confirm('Kya aap is record ko delete karna chahte hain?')) return;
+      let history = JSON.parse(localStorage.getItem('cert_history') || '[]');
+      history = history.filter(c => c.id !== id);
+      localStorage.setItem('cert_history', JSON.stringify(history));
+      renderHistory();
+    }
+
+    // Tab Switcher
+    function switchTab(tab) {
+      if(tab === 'generator') {
+        document.getElementById('previewPane').style.display = 'flex';
+        document.getElementById('historyPane').style.display = 'none';
+        document.getElementById('tabGen').classList.add('active');
+        document.getElementById('tabHist').classList.remove('active');
+      } else {
+        document.getElementById('previewPane').style.display = 'none';
+        document.getElementById('historyPane').style.display = 'block';
+        document.getElementById('tabGen').classList.remove('active');
+        document.getElementById('tabHist').classList.add('active');
+        renderHistory();
+      }
+    }
+
+    // Initial load
+    renderHistory();
+  </script>
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fee Record Management | Ganishka Portal</title>
+
+    <link rel="stylesheet" href="fee-record.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <!-- SheetJS Library for Excel Parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+
+<div class="app-layout">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar">
+        <div class="brand">
+            <i class="fa-solid fa-wallet brand-icon"></i>
+            <h2>Ganishka Portal</h2>
+        </div>
+        
+        <nav class="nav-menu">
+            <a href="Dashboard.html" class="nav-item"><i class="fa-solid fa-border-all"></i> Overview</a>
+            <a href="gt_dashboard.html" class="nav-item"><i class="fa-solid fa-code"></i> Technology</a>
+            <a href="ga-dashboard.html" class="nav-item"><i class="fa-solid fa-book-open"></i> Academy</a>
+            <a href="fee-record.html" class="nav-item active"><i class="fa-solid fa-receipt"></i> Fee Records</a>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button class="signout-btn"><i class="fa-solid fa-right-from-bracket"></i> Sign Out</button>
+        </div>
+    </aside>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        
+        <!-- Top Navbar -->
+        <header class="top-nav">
+            <div class="nav-title">
+                <i class="fa-solid fa-wallet"></i>
+                <span>Fee Record Management</span>
+            </div>
+
+            <div class="user-profile">
+                <div class="avatar">AD</div>
+                <div class="user-info">
+                    <span class="user-name">Administrator</span>
+                    <span class="user-role">System Admin</span>
+                </div>
+                <button class="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Logout</button>
+            </div>
+        </header>
+
+        <!-- Workspace Container -->
+        <div class="workspace">
+            <div class="workspace-header">
+                <div>
+                    <h1>Fee Records Workspace</h1>
+                    <p>Add, update, search, and manage student fee receipts and balances.</p>
+                </div>
+                <button class="back-btn" onclick="history.back()">
+                    <i class="fa-solid fa-arrow-left"></i> Back
+                </button>
+            </div>
+
+            <!-- Form Card -->
+            <div class="form-card">
+                <h2>Add Fee Record</h2>
+
+                <div class="form-grid">
+                    <!-- Row 1 -->
+                    <div class="input-box">
+                        <label>Receipt Number <span class="required">*</span></label>
+                        <input type="text" id="receiptNo" placeholder="e.g. FR0002">
+                    </div>
+
+                    <div class="input-box">
+                        <label>Student ID <span class="required">*</span></label>
+                        <input type="text" id="studentId" placeholder="e.g. STU101">
+                    </div>
+
+                    <div class="input-box">
+                        <label>Student Name <span class="required">*</span></label>
+                        <input type="text" id="studentName" placeholder="Enter Student Name">
+                    </div>
+
+                    <div class="input-box">
+                        <label>Email ID (Optional)</label>
+                        <input type="email" id="email" placeholder="Enter Email">
+                    </div>
+
+                    <!-- Row 2 -->
+                    <div class="input-box">
+                        <label>Organization <span class="required">*</span></label>
+                        <select id="organization">
+                            <option value="">Select Organization</option>
+                            <option value="GT">Ganishka Technology (GT)</option>
+                            <option value="GA">Ganishka Academy (GA)</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Fee Type / Course <span class="required">*</span></label>
+                        <select id="feeType">
+                            <option value="">Select Organization First</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box" id="domainBox" style="display:none;">
+                        <label>Internship Domain</label>
+                        <select id="domain">
+                            <option value="">Select Domain</option>
+                            <option>Web Development</option>
+                            <option>Python</option>
+                            <option>Java</option>
+                            <option>AI & Machine Learning</option>
+                            <option>Data Science</option>
+                            <option>UI/UX Design</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box" id="projectBox" style="display:none;">
+                        <label>Project Type</label>
+                        <select id="projectType">
+                            <option value="">Select Project Type</option>
+                            <option>Mini Project</option>
+                            <option>Major Project</option>
+                            <option>Final Year Project</option>
+                        </select>
+                    </div>
+
+                    <!-- Row 3 -->
+                    <div class="input-box">
+                        <label>Total Fee (₹) <span class="required">*</span></label>
+                        <input type="number" id="totalFee" placeholder="Enter Total Fee" min="0">
+                    </div>
+
+                    <div class="input-box">
+                        <label>Paid Amount (₹) <span class="required">*</span></label>
+                        <input type="number" id="paidFee" placeholder="Enter Paid Amount" min="0">
+                        <span id="paidFeeError" class="error-msg" style="display:none;">Paid amount cannot exceed Total Fee!</span>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Balance (₹)</label>
+                        <input type="number" id="balance" readonly placeholder="0.00">
+                    </div>
+
+                    <div class="input-box">
+                        <label>Payment Mode <span class="required">*</span></label>
+                        <select id="paymentMode">
+                            <option value="">Select Payment Mode</option>
+                            <option>Cash</option>
+                            <option>UPI</option>
+                            <option>Card</option>
+                            <option>Bank Transfer</option>
+                        </select>
+                    </div>
+
+                    <div class="input-box">
+                        <label>Payment Date <span class="required">*</span></label>
+                        <input type="date" id="paymentDate">
+                    </div>
+
+                    <!-- Row 4 -->
+                    <div class="input-box full-width">
+                        <label>Remarks</label>
+                        <textarea id="remarks" rows="2" placeholder="Enter Remarks (Optional)"></textarea>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="btn-group full-width">
+                        <button id="saveBtn" class="btn-primary">
+                            <i class="fa-solid fa-floppy-disk"></i> Save
+                        </button>
+                        <button id="updateBtn" class="btn-primary" style="display:none;">
+                            <i class="fa-solid fa-pen"></i> Update
+                        </button>
+                        <button id="resetBtn" class="btn-secondary">
+                            <i class="fa-solid fa-rotate-right"></i> Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search & Actions Section -->
+            <div class="search-card">
+                <div class="excel-import-container">
+                    <button id="showFormRecordsBtn" class="excel-btn view-btn-active">
+                        <i class="fa-solid fa-list-check"></i> Form Saved Records
+                    </button>
+
+                    <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display: none;">
+                    <button id="readExcelBtn" class="excel-btn">
+                        <i class="fa-solid fa-file-excel"></i> Read from Excel
+                    </button>
+                </div>
+                <input type="text" id="searchInput" placeholder="🔍 Search by Receipt No., Student ID, Name, or Organization">
+            </div>
+
+            <!-- Table Section -->
+            <div class="table-card">
+                <table id="feeTable">
+                    <thead>
+                        <tr>
+                            <th>Receipt No</th>
+                            <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Organization</th>
+                            <th>Fee Type / Course</th>
+                            <th>Paid</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Dynamic Records populated by Javascript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Printable Fee Receipt -->
+<div id="printReceipt">
+    <div class="receipt-card">
+        <div class="receipt-header">
+            <div class="logo-box">
+                <img id="receiptLogo1" src="logo.jpeg" alt="Logo 1" onerror="this.classList.add('hide-img');">
+                <div class="logo-fallback"><i class="fa-solid fa-building-columns"></i></div>
+            </div>
+            
+            <div class="header-title">
+                <h1>Ganishka Enterprises</h1>
+                <p>Ganishka Technology (GT) & Ganishka Academy (GA)</p>
+                <div class="receipt-tag">FEE PAYMENT RECEIPT</div>
+            </div>
+
+            <div class="logo-box">
+                <img id="receiptLogo2" src="logo1.jpeg" alt="Logo 2" onerror="this.classList.add('hide-img');">
+                <div class="logo-fallback"><i class="fa-solid fa-graduation-cap"></i></div>
+            </div>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <div class="receipt-meta-row">
+            <div class="meta-item">
+                <span class="meta-label">Receipt No:</span>
+                <span id="rReceiptNo" class="meta-val highlight"></span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Date:</span>
+                <span id="rDate" class="meta-val"></span>
+            </div>
+        </div>
+
+        <div class="receipt-grid">
+            <div class="grid-column">
+                <div class="detail-row">
+                    <span class="d-label">Student ID:</span>
+                    <span id="rStudentId" class="d-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Student Name:</span>
+                    <span id="rStudent" class="d-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Organization:</span>
+                    <span id="rOrganization" class="d-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Course / Fee Type:</span>
+                    <span id="rFeeType" class="d-value"></span>
+                </div>
+                <div class="detail-row" id="domainRow" style="display:none;">
+                    <span class="d-label">Domain:</span>
+                    <span id="rDomain" class="d-value"></span>
+                </div>
+                <div class="detail-row" id="projectRow" style="display:none;">
+                    <span class="d-label">Project Type:</span>
+                    <span id="rProjectType" class="d-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Email ID:</span>
+                    <span id="rEmail" class="d-value"></span>
+                </div>
+            </div>
+
+            <div class="grid-column">
+                <div class="detail-row">
+                    <span class="d-label">Total Fee:</span>
+                    <span class="d-value">₹<span id="rTotalFee"></span></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Paid Amount:</span>
+                    <span class="d-value paid-text">₹<span id="rPaidFee"></span></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Balance:</span>
+                    <span class="d-value balance-text">₹<span id="rBalance"></span></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Payment Mode:</span>
+                    <span id="rPaymentMode" class="d-value"></span>
+                </div>
+                <div class="detail-row">
+                    <span class="d-label">Status:</span>
+                    <span id="rStatus" class="status-pill"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="receipt-divider"></div>
+
+        <div class="remarks-box">
+            <span class="d-label">Remarks / Details:</span>
+            <span id="rRemarks" class="d-value"></span>
+        </div>
+
+        <div class="receipt-footer-sign">
+            <div class="note-text">
+                <i class="fa-solid fa-circle-check"></i> Thank you for your payment!
+            </div>
+            <div class="signature-container">
+                <div class="sign-line"></div>
+                <span>Authorized Signatory</span>
+            </div>
+        </div>
+
+        <div class="receipt-contact-bar">
+            <span><i class="fa-solid fa-phone"></i> +91 98765 43210</span>
+            <span>|</span>
+            <span><i class="fa-solid fa-envelope"></i> info@ganishka.com</span>
+            <span>|</span>
+            <span><i class="fa-solid fa-globe"></i> www.ganishka.com</span>
+        </div>
+    </div>
+</div>
+
+<script src="fee-record.js"></script>
+</body>
+</html>

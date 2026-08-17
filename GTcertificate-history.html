@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate History - Module</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="GTcertificate-history.css">
+</head>
+<body>
+
+<header>
+    <h2>Certificate History Module</h2>
+    <div class="header-actions">
+        <button class="back-btn" onclick="window.location.href='gt_dashboard.html'">⬅ Back to Dashboard</button>
+    </div>
+</header>
+
+<div class="history-container">
+    <div class="history-controls">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="🔍 Search by Name, Student ID, or Cert No..." onkeyup="filterHistory()">
+        </div>
+        <div class="stats-badge">
+            Total Records: <span id="totalRecords">0</span>
+        </div>
+    </div>
+
+    <div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cert No</th>
+                    <th>Student ID</th>
+                    <th>Student Name</th>
+                    <th>Domain</th>
+                    <th>College</th>
+                    <th>Issue Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="historyTableBody">
+                <!-- Dynamically loaded rows -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<script src="GTcertificate-history.js"></script>
+</body>
+</html>
